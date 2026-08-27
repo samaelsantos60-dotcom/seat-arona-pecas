@@ -8,23 +8,30 @@ st.set_page_config(
     layout="wide"
 )
 
-# Inicializar o estado da sessão para a matrícula e veículo selecionado
+# Base de conhecimento de matrículas em Portugal para simulação real
+MATRICULAS_CONHECIDAS = {
+    "13-24-PZ": {"veiculo": "SEAT Arona 1.0 TSI (Gasolina)", "motorizacao": "1.0 TSI (Gasolina)"},
+    "48-XT-92": {"veiculo": "SEAT Arona 1.6 TDI (Diesel)", "motorizacao": "1.6 TDI (Diesel)"},
+    "91-AA-05": {"veiculo": "SEAT Arona 1.5 TSI / Outras", "motorizacao": "1.5 TSI / Outras"},
+}
+
+# Inicializar o estado da sessão
 if 'veiculo_ativo' not in st.session_state:
-    st.session_state.veiculo_ativo = "SEAT ARONA 1.0 TSI"
+    st.session_state.veiculo_ativo = "SEAT Arona 1.0 TSI (Gasolina)"
+if 'motorizacao_ativa' not in st.session_state:
+    st.session_state.motorizacao_ativa = "1.0 TSI (Gasolina)"
 if 'matricula_ativa' not in st.session_state:
     st.session_state.matricula_ativa = "13-24-PZ"
 if 'mostrar_modal' not in st.session_state:
     st.session_state.mostrar_modal = False
 
-# Estilo CSS personalizado para imitar o design profissional da Norauto e o modal
+# Estilo CSS personalizado
 st.markdown("""
     <style>
-    /* Ocultar elementos padrão do Streamlit para um aspeto mais limpo */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* Barra de topo estilo e-commerce */
     .top-bar {
         background-color: #111827;
         padding: 12px 24px;
@@ -41,17 +48,6 @@ st.markdown("""
         color: #f59e0b;
         letter-spacing: -0.5px;
     }
-    .user-badge {
-        background-color: #1f2937;
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 14px;
-        border: 1px solid #374151;
-        color: #e5e7eb;
-        cursor: pointer;
-    }
-    
-    /* Cartões de produtos */
     .product-card {
         background-color: #ffffff;
         border: 1px solid #e5e7eb;
@@ -79,8 +75,6 @@ st.markdown("""
         font-weight: 700;
         color: #111827;
     }
-    
-    /* Caixa do modal simulado */
     .modal-box {
         background-color: #ffffff;
         border: 2px solid #f59e0b;
@@ -92,7 +86,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 1. DEFINIÇÃO DA FUNÇÃO DE CARTÃO DE PRODUTO
+# Função para renderizar cada cartão de peça
 def renderizar_cartao(peca):
     url_loja = peca['link_compra']
     nome_loja = "Loja Online"
@@ -115,7 +109,7 @@ def renderizar_cartao(peca):
     st.link_button(f"🛒 Ver em {nome_loja}", url_loja, use_container_width=True)
     st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
 
-# Cabeçalho Superior Fixo (Estilo Norauto)
+# Cabeçalho Superior Fixo
 col_top1, col_top2 = st.columns([3, 1])
 with col_top1:
     st.markdown("""
@@ -125,19 +119,19 @@ with col_top1:
     """, unsafe_allow_html=True)
 
 with col_top2:
-    # Botão interativo no topo para abrir o seletor de matrícula
     if st.button(f"🚗 {st.session_state.veiculo_ativo} ({st.session_state.matricula_ativa})", use_container_width=True):
         st.session_state.mostrar_modal = not st.session_state.mostrar_modal
 
 st.markdown("<hr style='margin: 10px 0 20px 0;'>", unsafe_allow_html=True)
 
-# MODAL / PAINEL DE IDENTIFICAÇÃO DE VEÍCULO POR MATRÍCULA
+# MODAL DE MATRÍCULA
 if st.session_state.mostrar_modal:
     with st.container():
         st.markdown("""
             <div class="modal-box">
-                <h2 style="color: #111827; margin-top: 0; font-size: 22px;">Identifique o seu veículo</h2>
-                <p style="color: #4b5563; font-size: 14px;">Diga-nos a matrícula do seu carro para desbloquear o acesso a produtos e serviços compatíveis.</p>
+                <h2 style="color: #111827; margin-top: 0; font-size: 22px;">Identifique o seu veículo por matrícula</h2>
+                <p style="color: #4b5563; font-size: 14px;">Insira a matrícula para detetar automaticamente a motorização e peças compatíveis.</p>
+                <p style="font-size: 12px; color: #9ca3af;">💡 Experimente testar estas matrículas portuguesas de exemplo: <code>13-24-PZ</code> (Gasolina 1.0) ou <code>48-XT-92</code> (Diesel 1.6)</p>
             </div>
         """, unsafe_allow_html=True)
         
@@ -147,8 +141,17 @@ if st.session_state.mostrar_modal:
         with col_m2:
             st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
             if st.button("Pesquisar Matrícula", type="primary", use_container_width=True):
-                st.session_state.matricula_ativa = input_mat.upper()
-                st.session_state.veiculo_ativo = "SEAT ARONA 1.0 TSI"
+                mat_limpa = input_mat.upper().strip()
+                if mat_limpa in MATRICULAS_CONHECIDAS:
+                    st.session_state.matricula_ativa = mat_limpa
+                    st.session_state.veiculo_ativo = MATRICULAS_CONHECIDAS[mat_limpa]["veiculo"]
+                    st.session_state.motorizacao_ativa = MATRICULAS_CONHECIDAS[mat_limpa]["motorizacao"]
+                    st.success(f"Veículo reconhecido: {st.session_state.veiculo_ativo}")
+                else:
+                    # Se for outra matrícula desconhecida, assume padrão genérico
+                    st.session_state.matricula_ativa = mat_limpa or "AA-00-BB"
+                    st.session_state.veiculo_ativo = "SEAT Arona (Outra Versão)"
+                    st.session_state.motorizacao_ativa = "Todas as Motorizações"
                 st.session_state.mostrar_modal = False
                 st.rerun()
         with col_m3:
@@ -157,10 +160,10 @@ if st.session_state.mostrar_modal:
                 st.session_state.mostrar_modal = False
                 st.rerun()
                 
-        st.markdown("🇵🇹 *País selecionado: Portugal (Alterar país)*")
+        st.markdown("🇵🇹 *País: Portugal*")
         st.markdown("---")
 
-# Barra de Navegação Horizontal por Categorias (Estilo Abas)
+# Abas de Categorias
 categoria_ativa = st.radio(
     "Navegação por Categorias",
     ["Todas as Categorias"] + CATEGORIAS,
@@ -170,8 +173,8 @@ categoria_ativa = st.radio(
 
 st.markdown("---")
 
-# Linha de Pesquisa e Filtros Rápidos
-col_search, col_motor = st.columns([3, 1])
+# Linha de Pesquisa e Indicador de Motorização Ativa pela Matrícula
+col_search, col_info = st.columns([3, 1])
 
 with col_search:
     pesquisa_livre = st.text_input(
@@ -180,8 +183,8 @@ with col_search:
         label_visibility="collapsed"
     )
 
-with col_motor:
-    motorizacao_sel = st.selectbox("Motorização", MOTORIZACOES, label_visibility="collapsed")
+with col_info:
+    st.markdown(f"<div style='background-color:#e5e7eb; padding:8px 12px; border-radius:6px; font-size:13px; text-align:center;'>⚙️ Motor: <b>{st.session_state.motorizacao_ativa}</b></div>", unsafe_allow_html=True)
 
 st.markdown("")
 
@@ -220,13 +223,16 @@ with col_esq:
         st.info(dica)
 
 with col_dir:
-    st.markdown(f"### Catálogo Compatível com Matrícula `{st.session_state.matricula_ativa}`")
-    st.markdown(f"<p style='color: #6b7280; font-size: 14px;'>Veículo: <b>{st.session_state.veiculo_ativo}</b> | Categoria: <b>{categoria_ativa}</b></p>", unsafe_allow_html=True)
+    st.markdown(f"### Peças Compatíveis com Matrícula `{st.session_state.matricula_ativa}`")
+    st.markdown(f"<p style='color: #6b7280; font-size: 14px;'>Veículo detetado: <b>{st.session_state.veiculo_ativo}</b> | Categoria: <b>{categoria_ativa}</b></p>", unsafe_allow_html=True)
     
-    # Filtragem de Peças
+    # Filtragem inteligente por motorização da matrícula + categoria + texto
     partes_filtradas = []
+    motor_atual = st.session_state.motorizacao_ativa
+    
     for p in PARTES:
-        match_motor = (motorizacao_sel == "Todas as Motorizações" or p["motorizacao"] == motorizacao_sel or p["motorizacao"] == "Todas as Motorizações")
+        # Compatibilidade com a motorização do carro associado à matrícula
+        match_motor = (motor_atual == "Todas as Motorizações" or p["motorizacao"] == motor_atual or p["motorizacao"] == "Todas as Motorizações")
         match_cat = (categoria_ativa == "Todas as Categorias" or p["categoria"] == categoria_ativa)
         
         texto_busca = pesquisa_livre.lower().strip()
@@ -250,9 +256,8 @@ with col_dir:
             partes_filtradas.append(p)
 
     if not partes_filtradas:
-        st.warning("Nenhuma peça encontrada com os critérios especificados. Tente pesquisar por outro termo (ex: 'filtro', 'óleo', 'travão').")
+        st.warning("Nenhuma peça encontrada com os critérios especificados para esta motorização. Tente alterar a matrícula ou limpar a pesquisa.")
     else:
-        # Exibição em grelha de 2 colunas para os produtos
         for i in range(0, len(partes_filtradas), 2):
             c1, c2 = st.columns(2)
             
