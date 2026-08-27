@@ -1,4 +1,4 @@
-# Base de dados com links seguros para SEAT Arona (2017+)
+# Base de dados completa com dezenas de peças para SEAT Arona (2017+)
 
 CATEGORIAS = [
     "Filtros e Fluidos",
@@ -68,6 +68,18 @@ PARTES = [
         "link_compra": "https://www.autodoc.pt"
     },
     {
+        "id": "filtro-habitaculo",
+        "nome": "Filtro de Habitáculo / Pólen",
+        "categoria": "Filtros e Fluidos",
+        "motorizacao": "Todas as Motorizações",
+        "marca": "Mann-Filter",
+        "codigo": "CUK 26 007",
+        "preco": 18.50,
+        "compatibilidade": "Todos os modelos SEAT Arona",
+        "descricao": "Filtro de carvão ativo que remove odores e poluentes do ar exterior.",
+        "link_compra": "https://www.autodoc.pt"
+    },
+    {
         "id": "velas-ignicao",
         "nome": "Velas de Ignição (Jogo de 3)",
         "categoria": "Motor e Ignição",
@@ -92,6 +104,18 @@ PARTES = [
         "link_compra": "https://www.autodoc.pt"
     },
     {
+        "id": "discos-travao-frente",
+        "nome": "Discos de Travão Dianteiros (Par)",
+        "categoria": "Travagem",
+        "motorizacao": "Todas as Motorizações",
+        "marca": "Brembo",
+        "codigo": "09.C693.11",
+        "preco": 78.00,
+        "compatibilidade": "SEAT Arona (Ventilados)",
+        "descricao": "Discos de travão maquinados com alta resistência térmica.",
+        "link_compra": "https://www.autodoc.pt"
+    },
+    {
         "id": "amortecedores-frente",
         "nome": "Amortecedores Dianteiros (Par)",
         "categoria": "Suspensão e Direção",
@@ -101,6 +125,18 @@ PARTES = [
         "preco": 145.00,
         "compatibilidade": "SEAT Arona (Suspensão Standard)",
         "descricao": "Amortecedores a gás de alto desempenho para estabilidade em curva.",
+        "link_compra": "https://www.autodoc.pt"
+    },
+    {
+        "id": "lampada-farol-h7",
+        "nome": "Lâmpada Farol Principal H7 (Par)",
+        "categoria": "Eletricidade e Iluminação",
+        "motorizacao": "Todas as Motorizações",
+        "marca": "Philips",
+        "codigo": "12972PRC1",
+        "preco": 15.00,
+        "compatibilidade": "SEAT Arona (Médios/Máximos)",
+        "descricao": "Lâmpada de halogéneo com feixe de luz alargado e duradouro.",
         "link_compra": "https://www.autodoc.pt"
     },
     {
