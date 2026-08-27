@@ -1,89 +1,197 @@
-import streamlit as st
-from data import CATEGORIAS, DICAS_GERAIS, LOJAS, MODELOS, PARTES
+# Base de dados limpa para data.py
 
-st.set_page_config(
-    page_title="AutoPeças PT - SEAT Arona",
-    page_icon="🚗",
-    layout="wide"
-)
+CATEGORIAS = [
+    "Filtros e Fluidos",
+    "Motor e Ignição",
+    "Travagem",
+    "Suspensão e Direção",
+    "Eletricidade e Iluminação"
+]
 
-def main():
-    st.title("AutoPeças PT")
-    st.markdown("Catálogo inteligente de peças, acessórios e referências para **SEAT Arona** e grupo VAG.")
-    
-    st.sidebar.header("Filtros de Pesquisa")
-    modelo_sel = st.sidebar.selectbox("Selecione o Modelo", MODELOS)
-    
-    # Menu lateral de navegação
-    menu = st.sidebar.radio("Navegação", ["Catálogo de Peças", "Dicas para Poupar", "Lojas Recomendadas"])
-    
-    if menu == "Catálogo de Peças":
-        pagina_catalogo(modelo_sel)
-    elif menu == "Dicas para Poupar":
-        pagina_dicas()
-    elif menu == "Lojas Recomendadas":
-        pagina_lojas()
+MODELOS = [
+    "SEAT Arona (2017+)"
+]
 
-def pagina_catalogo(modelo):
-    st.header("Catálogo de Peças")
-    st.markdown(f"Peças, normas e preços de referência para: **{modelo}**")
-    
-    # Filtros por categoria e pesquisa livre
-    col1, col2 = st.columns(2)
-    with col1:
-        cat_sel = st.selectbox("Categoria", ["Todas as Categorias"] + CATEGORIAS)
-    with col2:
-        pesquisa = st.text_input("Pesquisa livre (ex: filtro, óleo, velas, pastilhas...)")
-    
-    # Filtragem das peças
-    resultados = PARTES
-    
-    if cat_sel != "Todas as Categorias":
-        resultados = [p for p in resultados if p["categoria"] == cat_sel]
-        
-    if pesquisa:
-        termo = pesquisa.lower()
-        resultados = [
-            p for p in resultados 
-            if termo in p["nome"].lower() 
-            or termo in p["marca"].lower() 
-            or termo in p["codigo"].lower()
-            or termo in p["descricao"].lower()
-        ]
-    
-    st.markdown("---")
-    
-    if not resultados:
-        st.warning("Nenhuma peça encontrada com os critérios selecionados. Tente termos mais genéricos.")
-        return
-        
-    st.success(f"Encontradas {len(resultados)} peça(s) correspondentes.")
-    
-    for peca in resultados:
-        with st.container():
-            st.subheader(f"{peca['nome']} — {peca['preco']:.2f} €")
-            col_a, col_b = st.columns([2, 1])
-            with col_a:
-                st.write(f"**Marca:** {peca['marca']}")
-                st.write(f"**Referência/Código:** `{peca['codigo']}`")
-                st.write(f"**Descrição:** {pecs_desc(peca)}") if 'descricao' in peca else st.write(f"**Compatibilidade:** {peca['compatibilidade']}")
-            with col_b:
-                st.info(f"Categoria: {peca['categoria']}")
-            st.markdown("---")
+DICAS_GERAIS = [
+    "Verifique sempre a referência OEM antes de efetuar a substituição.",
+    "Para motores 1.0 TSI, utilize exclusivamente óleos com norma VW 504 00 / 507 00."
+]
 
-def pecs_desc(peca):
-    return f"{peca['descricao']} ({peca['compatibilidade']})"
+LOJAS = [
+    {"nome": "AutoDoc Online", "dominio": "autodoc.pt", "url": "https://www.autodoc.pt"},
+    {"nome": "Oscaro Portugal", "dominio": "oscaro.pt", "url": "https://www.oscaro.pt"},
+    {"nome": "Norauto", "dominio": "norauto.pt", "url": "https://www.norauto.pt"}
+]
 
-def pagina_dicas():
-    st.header("Dicas para Poupar na Manutenção")
-    for i, dica in enumerate(DICAS_GERAIS, 1):
-        st.markdown(f"**{i}.** {dica}")
-
-def pagina_lojas():
-    st.header("Lojas Recomendadas de Peças")
-    st.markdown("Consulte os principais fornecedores online com envio para Portugal:")
-    for loja in LOJAS:
-        st.markdown(f"- **[{loja['nome']}]({loja['url']})** (Domínio: `{loja['dominio']}`)")
-
-if __name__ == "__main__":
-    main()
+PARTES = [
+    {
+        "id": "filtro-oleo",
+        "nome": "Filtro de Óleo",
+        "categoria": "Filtros e Fluidos",
+        "marca": "Mann-Filter",
+        "codigo": "W 712/95",
+        "preco": 11.50,
+        "compatibilidade": "SEAT Arona 1.0 TSI / 1.6 TDI",
+        "descricao": "Filtro de óleo de alta eficiência para proteção do motor."
+    },
+    {
+        "id": "oleo-motor",
+        "nome": "Óleo de Motor 5W30 (5L)",
+        "categoria": "Filtros e Fluidos",
+        "marca": "Castrol Edge Professional",
+        "codigo": "LL III 5W-30 (Norma VW 504 00 / 507 00)",
+        "preco": 48.90,
+        "compatibilidade": "SEAT Arona Gasolina e Diesel",
+        "descricao": "Óleo sintético de tecnologia avançada aprovado pelo grupo VAG."
+    },
+    {
+        "id": "filtro-ar",
+        "nome": "Filtro de Ar do Motor",
+        "categoria": "Filtros e Fluidos",
+        "marca": "Bosch",
+        "codigo": "F 026 400 529",
+        "preco": 14.20,
+        "compatibilidade": "SEAT Arona 1.0 TSI / 1.6 TDI",
+        "descricao": "Retém impurezas e garante o fluxo de ar ideal para a admissão."
+    },
+    {
+        "id": "filtro-habitaculo",
+        "nome": "Filtro de Habitáculo (Polen/Carvão Ativado)",
+        "categoria": "Filtros e Fluidos",
+        "marca": "Mann-Filter",
+        "codigo": "CUK 26 007",
+        "preco": 18.50,
+        "compatibilidade": "Todos os modelos SEAT Arona",
+        "descricao": "Filtro de carvão ativo que remove odores e poluentes do ar exterior."
+    },
+    {
+        "id": "liquido-refrigerante",
+        "nome": "Líquido de Refrigeração G12evo / G13 (1L)",
+        "categoria": "Filtros e Fluidos",
+        "marca": "Febi Bilstein",
+        "codigo": "22272 (Norma TL 774 L)",
+        "preco": 9.80,
+        "compatibilidade": "SEAT Arona (Sistema VAG)",
+        "descricao": "Anticongelante de longa duração com proteção anticorrosiva."
+    },
+    {
+        "id": "velas-ignicao",
+        "nome": "Velas de Ignição (Jogo de 3)",
+        "categoria": "Motor e Ignição",
+        "marca": "NGK",
+        "codigo": "94201 (PLFER7A8EG)",
+        "preco": 36.00,
+        "compatibilidade": "SEAT Arona 1.0 TSI",
+        "descricao": "Velas de irídio de alta durabilidade para ignição otimizada."
+    },
+    {
+        "id": "bomba-agua",
+        "nome": "Bomba de Água / Sistema de Refrigeração",
+        "categoria": "Motor e Ignição",
+        "marca": "INA",
+        "codigo": "04C121600H",
+        "preco": 89.90,
+        "compatibilidade": "SEAT Arona 1.0 TSI",
+        "descricao": "Módulo de bomba de água com termostato integrado."
+    },
+    {
+        "id": "kit-distribuicao",
+        "nome": "Kit de Correia de Distribuição",
+        "categoria": "Motor e Ignição",
+        "marca": "Gates",
+        "codigo": "KP15670XS",
+        "preco": 125.00,
+        "compatibilidade": "SEAT Arona 1.6 TDI / 1.0 TSI",
+        "descricao": "Kit completo com correia dentada, tensores e roletes guias."
+    },
+    {
+        "id": "suporte-motor",
+        "nome": "Suporte / Coxim do Motor (Lado Direito)",
+        "categoria": "Motor e Ignição",
+        "marca": "Lemförder",
+        "codigo": "38435 01",
+        "preco": 54.50,
+        "compatibilidade": "SEAT Arona 1.0 TSI",
+        "descricao": "Absorve vibrações do motor garantindo o conforto a bordo."
+    },
+    {
+        "id": "pastilhas-travao-frente",
+        "nome": "Pastilhas de Travão Dianteiras (Jogo)",
+        "categoria": "Travagem",
+        "marca": "Brembo",
+        "codigo": "P 85 150",
+        "preco": 39.90,
+        "compatibilidade": "SEAT Arona (Eixo Dianteiro)",
+        "descricao": "Pastilhas de travão com excelente poder de travagem e baixo ruído."
+    },
+    {
+        "id": "discos-travao-frente",
+        "nome": "Discos de Travão Dianteiros (Par)",
+        "categoria": "Travagem",
+        "marca": "Brembo",
+        "codigo": "09.C693.11",
+        "preco": 78.00,
+        "compatibilidade": "SEAT Arona (Ventilados)",
+        "descricao": "Discos de travão maquinados com alta resistência térmica."
+    },
+    {
+        "id": "pastilhas-travao-tras",
+        "nome": "Pastilhas de Travão Traseiras (Jogo)",
+        "categoria": "Travagem",
+        "marca": "Textar",
+        "codigo": "2568301",
+        "preco": 32.50,
+        "compatibilidade": "SEAT Arona (Eixo Traseiro com travão de disco)",
+        "descricao": "Qualidade de origem para máxima segurança traseira."
+    },
+    {
+        "id": "amortecedores-frente",
+        "nome": "Amortecedores Dianteiros (Par)",
+        "categoria": "Suspensão e Direção",
+        "marca": "Sachs",
+        "codigo": "318 534",
+        "preco": 145.00,
+        "compatibilidade": "SEAT Arona (Suspensão Standard)",
+        "descricao": "Amortecedores a gás de alto desempenho para estabilidade em curva."
+    },
+    {
+        "id": "amortecedores-tras",
+        "nome": "Amortecedores Traseiros (Par)",
+        "categoria": "Suspensão e Direção",
+        "marca": "Bilstein",
+        "codigo": "19-291778",
+        "preco": 85.00,
+        "compatibilidade": "SEAT Arona (Eixo Traseiro)",
+        "descricao": "Conforto e aderência superior em piso irregular."
+    },
+    {
+        "id": "braco-suspensao",
+        "nome": "Braço / Triplo de Suspensão Inferior (Direito/Esquerdo)",
+        "categoria": "Suspensão e Direção",
+        "marca": "MOOG",
+        "codigo": "VO-TC-14389",
+        "preco": 68.00,
+        "compatibilidade": "SEAT Arona (Dianteiro)",
+        "descricao": "Braço de suspensão reforçado com rótula e casquilhos incluídos."
+    },
+    {
+        "id": "lampada-farol-h7",
+        "nome": "Lâmpada Farol Principal H7 (Par)",
+        "categoria": "Eletricidade e Iluminação",
+        "marca": "Philips",
+        "codigo": "12972PRC1 (Vision H7)",
+        "preco": 15.00,
+        "compatibilidade": "SEAT Arona (Médios/Máximos)",
+        "descricao": "Lâmpada de halogéneo com feixe de luz alargado."
+    },
+    {
+        "id": "escovas-limpa-vidros",
+        "nome": "Escovas Limpa-Para-Brisas (Kit Dianteiro)",
+        "categoria": "Eletricidade e Iluminação",
+        "marca": "Bosch",
+        "codigo": "Aerotwiin A863S",
+        "preco": 24.90,
+        "compatibilidade": "SEAT Arona (2017+)",
+        "descricao": "Escovas planas aerodinâmicas para limpeza silenciosa e sem marcas."
+    }
+]
