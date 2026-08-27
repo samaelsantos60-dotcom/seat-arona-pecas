@@ -1,23 +1,25 @@
-# Base de dados com múltiplos fornecedores e lojas de peças em Portugal para SEAT Arona (2017+)
-
 CATEGORIAS = [
-    "Filtros e Fluidos",
-    "Motor e Ignição",
-    "Travagem",
-    "Suspensão e Direção",
-    "Eletricidade e Iluminação",
-    "Carroçaria e Exteriores"
+    "Revisão e Óleos",
+    "Travões",
+    "Filtros",
+    "Escovas Limpa-Para-Brisas",
+    "Iluminação",
+    "Pneus e Jantes"
 ]
 
-MODELOS = [
-    "SEAT Arona (2017+)"
+CATEGORIAS_ACESSORIOS = [
+    "Transporte e Carga (Barras/Suportes)",
+    "Interior e Conforto (Tapetes/Capas)",
+    "Tecnologia e Eletrónica",
+    "Manutenção e Limpeza"
 ]
+
+MODELOS = ["SEAT Arona", "Renault Clio", "Peugeot 2008", "Volkswagen Golf"]
 
 MOTORIZACOES = [
     "Todas as Motorizações",
     "1.0 TSI (Gasolina)",
-    "1.6 TDI (Diesel)",
-    "1.5 TSI / Outras"
+    "1.6 TDI (Diesel)"
 ]
 
 DICAS_GERAIS = [
@@ -26,155 +28,96 @@ DICAS_GERAIS = [
 ]
 
 LOJAS = [
-    {"nome": "AutoDoc Online", "dominio": "autodoc.pt", "url": "https://www.autodoc.pt"},
-    {"nome": "Oscaro Portugal", "dominio": "oscaro.pt", "url": "https://www.oscaro.pt"},
-    {"nome": "Norauto", "dominio": "norauto.pt", "url": "https://www.norauto.pt"},
-    {"nome": "Mister-Auto PT", "dominio": "mister-auto.pt", "url": "https://www.mister-auto.pt"}
+    {"nome": "AutoDoc", "url": "https://www.autodoc.pt"},
+    {"nome": "Oscaro", "url": "https://www.oscaro.es"},
+    {"nome": "Norauto Portugal", "url": "https://www.norauto.pt"},
+    {"nome": "Mister-Auto", "url": "https://www.mister-auto.pt"}
 ]
 
+# Peças mecânicas existentes
 PARTES = [
     {
-        "id": "filtro-oleo",
-        "nome": "Filtro de Óleo",
-        "categoria": "Filtros e Fluidos",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Mann-Filter",
-        "codigo": "W 712/95",
-        "preco": 11.50,
-        "compatibilidade": "SEAT Arona 1.0 TSI / 1.6 TDI",
-        "descricao": "Filtro de óleo de alta eficiência para proteção do motor.",
-        "link_compra": "https://www.autodoc.pt"
-    },
-    {
-        "id": "oleo-motor",
-        "nome": "Óleo de Motor 5W30 (5L)",
-        "categoria": "Filtros e Fluidos",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Castrol Edge Professional",
-        "codigo": "LL III 5W-30",
-        "preco": 48.90,
-        "compatibilidade": "SEAT Arona Gasolina e Diesel",
-        "descricao": "Óleo sintético de tecnologia avançada aprovado pelo grupo VAG.",
-        "link_compra": "https://www.norauto.pt"
-    },
-    {
-        "id": "filtro-ar",
-        "nome": "Filtro de Ar do Motor",
-        "categoria": "Filtros e Fluidos",
+        "nome": "Óleo de Motor 5W30 LongLife 5L",
+        "marca": "Castrol Edge",
+        "codigo": "1535F6",
+        "preco": 54.90,
+        "categoria": "Revisão e Óleos",
         "motorizacao": "1.0 TSI (Gasolina)",
-        "marca": "Bosch",
-        "codigo": "F 026 400 529",
-        "preco": 14.20,
-        "compatibilidade": "SEAT Arona 1.0 TSI",
-        "descricao": "Retém impurezas e garante o fluxo de ar ideal para a admissão.",
-        "link_compra": "https://www.oscaro.pt"
+        "descricao": "Óleo sintético de alta performance compatível com a norma VW 504 00 / 507 00.",
+        "link_compra": "https://www.autodoc.pt/castrol/1535f6"
     },
     {
-        "id": "filtro-habitaculo",
-        "nome": "Filtro de Habitáculo / Pólen",
-        "categoria": "Filtros e Fluidos",
-        "motorizacao": "Todas as Motorizações",
+        "nome": "Filtro de Óleo Mann-Filter",
         "marca": "Mann-Filter",
-        "codigo": "CUK 26 007",
-        "preco": 18.50,
-        "compatibilidade": "Todos os modelos SEAT Arona",
-        "descricao": "Filtro de carvão ativo que remove odores e poluentes do ar exterior.",
-        "link_compra": "https://www.mister-auto.pt"
-    },
-    {
-        "id": "velas-ignicao",
-        "nome": "Velas de Ignição (Jogo de 3)",
-        "categoria": "Motor e Ignição",
+        "codigo": "HU 6013 z",
+        "preco": 12.50,
+        "categoria": "Filtros",
         "motorizacao": "1.0 TSI (Gasolina)",
-        "marca": "NGK",
-        "codigo": "94201",
-        "preco": 36.00,
-        "compatibilidade": "SEAT Arona 1.0 TSI",
-        "descricao": "Velas de irídio de alta durabilidade para ignição otimizada.",
-        "link_compra": "https://www.autodoc.pt"
+        "descricao": "Filtro de óleo de elevada retenção de impurezas para motores do grupo VAG.",
+        "link_compra": "https://www.oscaro.es/filtro-de-aceite-mann-filter-hu-6013-z"
     },
     {
-        "id": "pastilhas-travao-frente",
-        "nome": "Pastilhas de Travão Dianteiras (Jogo)",
-        "categoria": "Travagem",
-        "motorizacao": "Todas as Motorizações",
+        "nome": "Jogo de Pastilhas de Travão Dianteiras",
         "marca": "Brembo",
-        "codigo": "P 85 150",
-        "preco": 39.90,
-        "compatibilidade": "SEAT Arona (Eixo Dianteiro)",
+        "codigo": "P 85 158",
+        "preco": 42.00,
+        "categoria": "Travões",
+        "motorizacao": "Todas as Motorizações",
         "descricao": "Pastilhas de travão com excelente poder de travagem e baixo ruído.",
-        "link_compra": "https://www.oscaro.pt"
+        "link_compra": "https://www.norauto.pt/pastilhas-de-travao"
     },
     {
-        "id": "discos-travao-frente",
-        "nome": "Discos de Travão Dianteiros (Par)",
-        "categoria": "Travagem",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Brembo",
-        "codigo": "09.C693.11",
-        "preco": 78.00,
-        "compatibilidade": "SEAT Arona (Ventilados)",
-        "descricao": "Discos de travão maquinados com alta resistência térmica.",
-        "link_compra": "https://www.mister-auto.pt"
-    },
-    {
-        "id": "amortecedores-frente",
-        "nome": "Amortecedores Dianteiros (Par)",
-        "categoria": "Suspensão e Direção",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Sachs",
-        "codigo": "318 534",
-        "preco": 145.00,
-        "compatibilidade": "SEAT Arona (Suspensão Standard)",
-        "descricao": "Amortecedores a gás de alto desempenho para estabilidade em curva.",
-        "link_compra": "https://www.autodoc.pt"
-    },
-    {
-        "id": "lampada-farol-h7",
-        "nome": "Lâmpada Farol Principal H7 (Par)",
-        "categoria": "Eletricidade e Iluminação",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Philips",
-        "codigo": "12972PRC1",
-        "preco": 15.00,
-        "compatibilidade": "SEAT Arona (Médios/Máximos)",
-        "descricao": "Lâmpada de halogéneo com feixe de luz alargado e duradouro.",
-        "link_compra": "https://www.norauto.pt"
-    },
-    {
-        "id": "escovas-limpa-vidros",
-        "nome": "Escovas Limpa-Para-Brisas (Kit Dianteiro)",
-        "categoria": "Eletricidade e Iluminação",
-        "motorizacao": "Todas as Motorizações",
+        "nome": "Escovas Limpa-Para-Brisas Aerotwin",
         "marca": "Bosch",
-        "codigo": "A863S",
-        "preco": 24.90,
-        "compatibilidade": "SEAT Arona (2017+)",
-        "descricao": "Escovas planas aerodinâmicas para limpeza silenciosa e sem marcas.",
-        "link_compra": "https://www.norauto.pt"
+        "codigo": "A 863 S",
+        "preco": 28.90,
+        "categoria": "Escovas Limpa-Para-Brisas",
+        "motorizacao": "Todas as Motorizações",
+        "descricao": "Conjunto de escovas dianteiras planas específicas para SEAT Arona.",
+        "link_compra": "https://www.mister-auto.pt/escovas-bosch"
+    }
+]
+
+# **NOVO**: Lista de Acessórios dedicados/compatíveis com o veículo
+ACESSORIOS = [
+    {
+        "nome": "Barras de Tejadilho em Alumínio",
+        "marca": "Norauto / Thule",
+        "codigo": "NOR-BA-882",
+        "preco": 149.99,
+        "categoria": "Transporte e Carga (Barras/Suportes)",
+        "veiculo_compativel": "SEAT Arona",
+        "descricao": "Barras de tejadilho aerodinâmicas específicas com kit de fixação integrado para SEAT Arona com barras longitudinais.",
+        "link_compra": "https://www.norauto.pt/barras-tejadilho"
     },
     {
-        "id": "parachoques-frente",
-        "nome": "Pára-choques Dianteiro (Primário/Para Pintar)",
-        "categoria": "Carroçaria e Exteriores",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Pronto / OEM Compatible",
-        "codigo": "SEAT-ARONA-PF01",
-        "preco": 125.00,
-        "compatibilidade": "SEAT Arona (2017+)",
-        "descricao": "Pára-choques dianteiro preparado para pintura com primário de alta aderência.",
-        "link_compra": "https://www.oscaro.pt"
+        "nome": "Tapetes de Borracha à Medida (Gama Alta)",
+        "marca": "Gledring",
+        "codigo": "GL-0592-SEAT",
+        "preco": 49.90,
+        "categoria": "Interior e Conforto (Tapetes/Capas)",
+        "veiculo_compativel": "SEAT Arona",
+        "descricao": "Jogo de 4 tapetes em borracha com rebordo elevado e aroma a baunilha, desenhados à medida para o habitáculo do SEAT Arona.",
+        "link_compra": "https://www.autodoc.pt/tapetes-borracha"
     },
     {
-        "id": "parachoques-tras",
-        "nome": "Pára-choques Traseiro",
-        "categoria": "Carroçaria e Exteriores",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Pronto / OEM Compatible",
-        "codigo": "SEAT-ARONA-PT02",
-        "preco": 110.00,
-        "compatibilidade": "SEAT Arona (2017+)",
-        "descricao": "Pára-choques traseiro com encaixe perfeito para sensores de estacionamento.",
-        "link_compra": "https://www.mister-auto.pt"
+        "nome": "Suporte de Telemóvel Magnético para Grelha de Ventilação",
+        "marca": "Ugreen",
+        "codigo": "UG-MAG-01",
+        "preco": 15.99,
+        "categoria": "Tecnologia e Eletrónica",
+        "veiculo_compativel": "Universal",
+        "descricao": "Suporte magnético robusto com rotação de 360º para smartphones.",
+        "link_compra": "https://www.norauto.pt/tecnologia"
+    },
+    {
+        "nome": "Kit de Lavagem e Limpeza Rápida com Balde",
+        "marca": "Meguiar's",
+        "codigo": "MEG-KIT-PRO",
+        "preco": 34.50,
+        "categoria": "Manutenção e Limpeza",
+        "veiculo_compativel": "Universal",
+        "descricao": "Kit completo com champô, luva de microfibra e toalha de secagem para a pintura do carro.",
+        "link_compra": "https://www.norauto.pt/limpeza"
     }
 ]
