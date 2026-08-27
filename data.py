@@ -1,11 +1,12 @@
-# Base de dados completa com dezenas de peças para SEAT Arona (2017+)
+# Base de dados completa e atualizada para SEAT Arona (2017+)
 
 CATEGORIAS = [
     "Filtros e Fluidos",
     "Motor e Ignição",
     "Travagem",
     "Suspensão e Direção",
-    "Eletricidade e Iluminação"
+    "Eletricidade e Iluminação",
+    "Carroçaria e Exteriores"
 ]
 
 MODELOS = [
@@ -149,6 +150,30 @@ PARTES = [
         "preco": 24.90,
         "compatibilidade": "SEAT Arona (2017+)",
         "descricao": "Escovas planas aerodinâmicas para limpeza silenciosa e sem marcas.",
+        "link_compra": "https://www.autodoc.pt"
+    },
+    {
+        "id": "parachoques-frente",
+        "nome": "Pára-choques Dianteiro (Primário/Para Pintar)",
+        "categoria": "Carroçaria e Exteriores",
+        "motorizacao": "Todas as Motorizações",
+        "marca": "Pronto / OEM Compatible",
+        "codigo": "SEAT-ARONA-PF01",
+        "preco": 125.00,
+        "compatibilidade": "SEAT Arona (2017+)",
+        "descricao": "Pára-choques dianteiro preparado para pintura com primário de alta aderência.",
+        "link_compra": "https://www.autodoc.pt"
+    },
+    {
+        "id": "parachoques-tras",
+        "nome": "Pára-choques Traseiro",
+        "categoria": "Carroçaria e Exteriores",
+        "motorizacao": "Todas as Motorizações",
+        "marca": "Pronto / OEM Compatible",
+        "codigo": "SEAT-ARONA-PT02",
+        "preco": 110.00,
+        "compatibilidade": "SEAT Arona (2017+)",
+        "descricao": "Pára-choques traseiro com encaixe perfeito para sensores de estacionamento.",
         "link_compra": "https://www.autodoc.pt"
     }
 ]
