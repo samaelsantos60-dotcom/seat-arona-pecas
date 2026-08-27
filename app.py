@@ -36,7 +36,6 @@ def pagina_catalogo(modelo, motor):
     with col2:
         pesquisa = st.text_input("Pesquisa livre (ex: filtro, óleo, velas, pastilhas...)")
     
-    # Filtragem rigorosa por motorização e categoria
     resultados = PARTES
     
     if motor != "Todas as Motorizações":
@@ -69,13 +68,14 @@ def pagina_catalogo(modelo, motor):
             col_a, col_b = st.columns([2, 1])
             with col_a:
                 st.write(f"**Marca:** {peca['marca']}")
-                st.write(f"**Referência/Código:** `{peca['codigo']}`")
-                st.write(f"**Compatibilidade:** `{peca['motorizacao']}`")
+                st.write(f"**Referência/Código OEM:** `{peca['codigo']}`")
+                st.write(f"**Compatibilidade:** `{peca['compatibilidade']}`")
                 st.write(f"**Descrição:** {peca['descricao']}")
             with col_b:
                 st.info(f"Categoria: {peca['categoria']}")
-                query_busca = f"SEAT Arona {peca['codigo']}"
-                st.markdown(f"[🔍 Pesquisar referência online](https://www.google.com/search?q={query_busca.replace(' ', '+')})", unsafe_allow_html=True)
+                # Botão direto para a página de compra da peça
+                link = peca.get("link_compra", "https://www.autodoc.pt")
+                st.markdown(f'<p style="text-align: center;"><a href="{link}" target="_blank" style="background-color: #ff4b4b; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">🛒 Ir Direto para Compra</a></p>', unsafe_allow_html=True)
             st.markdown("---")
 
 def pagina_dicas():
