@@ -73,6 +73,29 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# 1. DEFINIÇÃO DA FUNÇÃO PRIMEIRO (Para evitar NameError)
+def renderizar_cartao(peca):
+    url_loja = peca['link_compra']
+    nome_loja = "Loja Online"
+    for loja in LOJAS:
+        if loja['url'] in url_loja:
+            nome_loja = loja['nome']
+            break
+            
+    st.markdown(f"""
+        <div class="product-card">
+            <span class="badge-cat">{peca['categoria']}</span>
+            <h4 style="margin-top: 8px; margin-bottom: 5px; color: #111827; font-size: 16px;">{peca['nome']}</h4>
+            <p style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Marca: <b>{peca['marca']}</b> | Ref: <code>{peca['codigo']}</code></p>
+            <p style="font-size: 13px; color: #374151; margin-bottom: 10px;">{peca['descricao']}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                <span class="price-tag">{peca['preco']:.2f} €</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+    st.link_button(f"🛒 Ver em {nome_loja}", url_loja, use_container_width=True)
+    st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
+
 # Cabeçalho Superior Fixo (Estilo Norauto)
 st.markdown("""
     <div class="top-bar">
@@ -110,10 +133,7 @@ with col_motor:
 
 st.markdown("")
 
-# Layout Principal em Duas Colunas (Sidebar Esquerda para Links Rápidos / Direita para Catálogo)
-col_sidebar_esq, col_principal = st.widgets_cols = st.columns([1, 3]) if hasattr(st, 'columns') else (None, None)
-
-# Vamos estruturar com colunas dedicadas
+# Layout Principal em Colunas
 col_esq, col_dir = st.columns([1, 3])
 
 with col_esq:
@@ -193,26 +213,3 @@ with col_dir:
                 if i + 1 < len(partes_filtradas):
                     peca = partes_filtradas[i + 1]
                     renderizar_cartao(peca)
-
-def renderizar_cartao(peca):
-    # Identificar loja associada
-    url_loja = peca['link_compra']
-    nome_loja = "Loja Online"
-    for loja in LOJAS:
-        if loja['url'] in url_loja:
-            nome_loja = loja['nome']
-            break
-            
-    st.markdown(f"""
-        <div class="product-card">
-            <span class="badge-cat">{peca['categoria']}</span>
-            <h4 style="margin-top: 8px; margin-bottom: 5px; color: #111827; font-size: 16px;">{peca['nome']}</h4>
-            <p style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Marca: <b>{peca['marca']}</b> | Ref: <code>{peca['codigo']}</code></p>
-            <p style="font-size: 13px; color: #374151; margin-bottom: 10px;">{peca['descricao']}</p>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-                <span class="price-tag">{peca['preco']:.2f} €</span>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-    st.link_button(f"🛒 Ver em {nome_loja}", url_loja, use_container_width=True)
-    st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
