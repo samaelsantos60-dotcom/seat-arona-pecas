@@ -1,4 +1,26 @@
-# Base de dados completa de peças para SEAT Arona (2017+)
+# Base de dados completa de peças e estruturas para SEAT Arona (2017+)
+
+CATEGORIAS = [
+    "Filtros e Fluidos",
+    "Motor e Ignição",
+    "Travagem",
+    "Suspensão e Direção",
+    "Eletricidade e Iluminação"
+]
+
+MODELOS = [
+    "SEAT Arona (2017+)"
+]
+
+DICAS_GERAIS = [
+    "Verifique sempre a referência OEM antes de efetuar a substituição.",
+    "Para motores 1.0 TSI, utilize exclusivamente óleos com norma VW 504 00 / 507 00."
+]
+
+LOJAS = [
+    {"nome": "AutoDoc Online", "url": "https://www.autodoc.pt"},
+    {"nome": "Oscaro Portugal", "url": "https://www.oscaro.pt"}
+]
 
 PARTES = [
     # --- FILTROS E FLUIDOS ---
