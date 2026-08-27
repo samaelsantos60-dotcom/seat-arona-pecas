@@ -1,4 +1,4 @@
-# Base de dados detalhada por motorização para SEAT Arona (2017+)
+# Base de dados com links diretos de compra para SEAT Arona (2017+)
 
 CATEGORIAS = [
     "Filtros e Fluidos",
@@ -40,7 +40,8 @@ PARTES = [
         "codigo": "W 712/95",
         "preco": 11.50,
         "compatibilidade": "SEAT Arona 1.0 TSI / 1.6 TDI",
-        "descricao": "Filtro de óleo de alta eficiência para proteção do motor."
+        "descricao": "Filtro de óleo de alta eficiência para proteção do motor.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=W+712%2F95"
     },
     {
         "id": "oleo-motor",
@@ -48,10 +49,11 @@ PARTES = [
         "categoria": "Filtros e Fluidos",
         "motorizacao": "Todas as Motorizações",
         "marca": "Castrol Edge Professional",
-        "codigo": "LL III 5W-30 (Norma VW 504 00 / 507 00)",
+        "codigo": "LL III 5W-30",
         "preco": 48.90,
         "compatibilidade": "SEAT Arona Gasolina e Diesel",
-        "descricao": "Óleo sintético de tecnologia avançada aprovado pelo grupo VAG."
+        "descricao": "Óleo sintético de tecnologia avançada aprovado pelo grupo VAG.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=Castrol+Edge+5W30+LL+III"
     },
     {
         "id": "filtro-ar",
@@ -62,29 +64,8 @@ PARTES = [
         "codigo": "F 026 400 529",
         "preco": 14.20,
         "compatibilidade": "SEAT Arona 1.0 TSI",
-        "descricao": "Retém impurezas e garante o fluxo de ar ideal para a admissão."
-    },
-    {
-        "id": "filtro-habitaculo",
-        "nome": "Filtro de Habitáculo (Polen/Carvão Ativado)",
-        "categoria": "Filtros e Fluidos",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Mann-Filter",
-        "codigo": "CUK 26 007",
-        "preco": 18.50,
-        "compatibilidade": "Todos os modelos SEAT Arona",
-        "descricao": "Filtro de carvão ativo que remove odores e poluentes do ar exterior."
-    },
-    {
-        "id": "liquido-refrigerante",
-        "nome": "Líquido de Refrigeração G12evo / G13 (1L)",
-        "categoria": "Filtros e Fluidos",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Febi Bilstein",
-        "codigo": "22272 (Norma TL 774 L)",
-        "preco": 9.80,
-        "compatibilidade": "SEAT Arona (Sistema VAG)",
-        "descricao": "Anticongelante de longa duração com proteção anticorrosiva."
+        "descricao": "Retém impurezas e garante o fluxo de ar ideal para a admissão.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=F+026+400+529"
     },
     {
         "id": "velas-ignicao",
@@ -92,43 +73,11 @@ PARTES = [
         "categoria": "Motor e Ignição",
         "motorizacao": "1.0 TSI (Gasolina)",
         "marca": "NGK",
-        "codigo": "94201 (PLFER7A8EG)",
+        "codigo": "94201",
         "preco": 36.00,
         "compatibilidade": "SEAT Arona 1.0 TSI",
-        "descricao": "Velas de irídio de alta durabilidade para ignição otimizada."
-    },
-    {
-        "id": "bomba-agua",
-        "nome": "Bomba de Água / Sistema de Refrigeração",
-        "categoria": "Motor e Ignição",
-        "motorizacao": "1.0 TSI (Gasolina)",
-        "marca": "INA",
-        "codigo": "04C121600H",
-        "preco": 89.90,
-        "compatibilidade": "SEAT Arona 1.0 TSI",
-        "descricao": "Módulo de bomba de água com termostato integrado."
-    },
-    {
-        "id": "kit-distribuicao",
-        "nome": "Kit de Correia de Distribuição",
-        "categoria": "Motor e Ignição",
-        "motorizacao": "1.6 TDI (Diesel)",
-        "marca": "Gates",
-        "codigo": "KP15670XS",
-        "preco": 125.00,
-        "compatibilidade": "SEAT Arona 1.6 TDI",
-        "descricao": "Kit completo com correia dentada, tensores e roletes guias."
-    },
-    {
-        "id": "suporte-motor",
-        "nome": "Suporte / Coxim do Motor (Lado Direito)",
-        "categoria": "Motor e Ignição",
-        "motorizacao": "1.0 TSI (Gasolina)",
-        "marca": "Lemförder",
-        "codigo": "38435 01",
-        "preco": 54.50,
-        "compatibilidade": "SEAT Arona 1.0 TSI",
-        "descricao": "Absorve vibrações do motor garantindo o conforto a bordo."
+        "descricao": "Velas de irídio de alta durabilidade para ignição otimizada.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=NGK+94201"
     },
     {
         "id": "pastilhas-travao-frente",
@@ -139,18 +88,8 @@ PARTES = [
         "codigo": "P 85 150",
         "preco": 39.90,
         "compatibilidade": "SEAT Arona (Eixo Dianteiro)",
-        "descricao": "Pastilhas de travão com excelente poder de travagem e baixo ruído."
-    },
-    {
-        "id": "discos-travao-frente",
-        "nome": "Discos de Travão Dianteiros (Par)",
-        "categoria": "Travagem",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Brembo",
-        "codigo": "09.C693.11",
-        "preco": 78.00,
-        "compatibilidade": "SEAT Arona (Ventilados)",
-        "descricao": "Discos de travão maquinados com alta resistência térmica."
+        "descricao": "Pastilhas de travão com excelente poder de travagem e baixo ruído.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=P+85+150"
     },
     {
         "id": "amortecedores-frente",
@@ -161,18 +100,8 @@ PARTES = [
         "codigo": "318 534",
         "preco": 145.00,
         "compatibilidade": "SEAT Arona (Suspensão Standard)",
-        "descricao": "Amortecedores a gás de alto desempenho para estabilidade em curva."
-    },
-    {
-        "id": "lampada-farol-h7",
-        "nome": "Lâmpada Farol Principal H7 (Par)",
-        "categoria": "Eletricidade e Iluminação",
-        "motorizacao": "Todas as Motorizações",
-        "marca": "Philips",
-        "codigo": "12972PRC1 (Vision H7)",
-        "preco": 15.00,
-        "compatibilidade": "SEAT Arona (Médios/Máximos)",
-        "descricao": "Lâmpada de halogéneo com feixe de luz alargado."
+        "descricao": "Amortecedores a gás de alto desempenho para estabilidade em curva.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=318+534"
     },
     {
         "id": "escovas-limpa-vidros",
@@ -180,9 +109,10 @@ PARTES = [
         "categoria": "Eletricidade e Iluminação",
         "motorizacao": "Todas as Motorizações",
         "marca": "Bosch",
-        "codigo": "Aerotwiin A863S",
+        "codigo": "A863S",
         "preco": 24.90,
         "compatibilidade": "SEAT Arona (2017+)",
-        "descricao": "Escovas planas aerodinâmicas para limpeza silenciosa e sem marcas."
+        "descricao": "Escovas planas aerodinâmicas para limpeza silenciosa e sem marcas.",
+        "link_compra": "https://www.autodoc.pt/search?keyword=Bosch+A863S"
     }
 ]
