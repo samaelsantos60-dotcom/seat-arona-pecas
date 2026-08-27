@@ -8,7 +8,15 @@ st.set_page_config(
     layout="wide"
 )
 
-# Estilo CSS personalizado para imitar o design profissional da Norauto
+# Inicializar o estado da sessão para a matrícula e veículo selecionado
+if 'veiculo_ativo' not in st.session_state:
+    st.session_state.veiculo_ativo = "SEAT ARONA 1.0 TSI"
+if 'matricula_ativa' not in st.session_state:
+    st.session_state.matricula_ativa = "13-24-PZ"
+if 'mostrar_modal' not in st.session_state:
+    st.session_state.mostrar_modal = False
+
+# Estilo CSS personalizado para imitar o design profissional da Norauto e o modal
 st.markdown("""
     <style>
     /* Ocultar elementos padrão do Streamlit para um aspeto mais limpo */
@@ -40,6 +48,7 @@ st.markdown("""
         font-size: 14px;
         border: 1px solid #374151;
         color: #e5e7eb;
+        cursor: pointer;
     }
     
     /* Cartões de produtos */
@@ -70,10 +79,20 @@ st.markdown("""
         font-weight: 700;
         color: #111827;
     }
+    
+    /* Caixa do modal simulado */
+    .modal-box {
+        background-color: #ffffff;
+        border: 2px solid #f59e0b;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        margin-bottom: 25px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# 1. DEFINIÇÃO DA FUNÇÃO PRIMEIRO (Para evitar NameError)
+# 1. DEFINIÇÃO DA FUNÇÃO DE CARTÃO DE PRODUTO
 def renderizar_cartao(peca):
     url_loja = peca['link_compra']
     nome_loja = "Loja Online"
@@ -97,16 +116,49 @@ def renderizar_cartao(peca):
     st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
 
 # Cabeçalho Superior Fixo (Estilo Norauto)
-st.markdown("""
-    <div class="top-bar">
-        <div>
-            <span class="logo-text">NORAUTO</span> &nbsp;|&nbsp; <span style="font-size: 16px; color: #9ca3af;">AutoPeças PT</span>
+col_top1, col_top2 = st.columns([3, 1])
+with col_top1:
+    st.markdown("""
+        <div style="padding-top: 5px;">
+            <span class="logo-text">NORAUTO</span> &nbsp;|&nbsp; <span style="font-size: 16px; color: #6b7280;">AutoPeças PT</span>
         </div>
-        <div>
-            <span class="user-badge">📍 Évora &nbsp;&nbsp;|&nbsp;&nbsp; 🚗 SEAT ARONA 1.0 TSI &nbsp;&nbsp;|&nbsp;&nbsp; 👤 Utilizador</span>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+
+with col_top2:
+    # Botão interativo no topo para abrir o seletor de matrícula
+    if st.button(f"🚗 {st.session_state.veiculo_ativo} ({st.session_state.matricula_ativa})", use_container_width=True):
+        st.session_state.mostrar_modal = not st.session_state.mostrar_modal
+
+st.markdown("<hr style='margin: 10px 0 20px 0;'>", unsafe_allow_html=True)
+
+# MODAL / PAINEL DE IDENTIFICAÇÃO DE VEÍCULO POR MATRÍCULA
+if st.session_state.mostrar_modal:
+    with st.container():
+        st.markdown("""
+            <div class="modal-box">
+                <h2 style="color: #111827; margin-top: 0; font-size: 22px;">Identifique o seu veículo</h2>
+                <p style="color: #4b5563; font-size: 14px;">Diga-nos a matrícula do seu carro para desbloquear o acesso a produtos e serviços compatíveis.</p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        col_m1, col_m2, col_m3 = st.columns([2, 1, 1])
+        with col_m1:
+            input_mat = st.text_input("Matrícula do veículo", value=st.session_state.matricula_ativa, placeholder="Ex: 13-24-PZ")
+        with col_m2:
+            st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+            if st.button("Pesquisar Matrícula", type="primary", use_container_width=True):
+                st.session_state.matricula_ativa = input_mat.upper()
+                st.session_state.veiculo_ativo = "SEAT ARONA 1.0 TSI"
+                st.session_state.mostrar_modal = False
+                st.rerun()
+        with col_m3:
+            st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+            if st.button("Fechar", use_container_width=True):
+                st.session_state.mostrar_modal = False
+                st.rerun()
+                
+        st.markdown("🇵🇹 *País selecionado: Portugal (Alterar país)*")
+        st.markdown("---")
 
 # Barra de Navegação Horizontal por Categorias (Estilo Abas)
 categoria_ativa = st.radio(
@@ -168,8 +220,8 @@ with col_esq:
         st.info(dica)
 
 with col_dir:
-    st.markdown(f"### Catálogo de Peças Disponíveis")
-    st.markdown(f"<p style='color: #6b7280; font-size: 14px;'>Filtro ativo: <b>{categoria_ativa}</b> | Motorização: <b>{motorizacao_sel}</b></p>", unsafe_allow_html=True)
+    st.markdown(f"### Catálogo Compatível com Matrícula `{st.session_state.matricula_ativa}`")
+    st.markdown(f"<p style='color: #6b7280; font-size: 14px;'>Veículo: <b>{st.session_state.veiculo_ativo}</b> | Categoria: <b>{categoria_ativa}</b></p>", unsafe_allow_html=True)
     
     # Filtragem de Peças
     partes_filtradas = []
