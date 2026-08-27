@@ -1,5 +1,5 @@
 import streamlit as st
-from data import CATEGORIAS, DICAS_GERAIS, LOJAS, MODELOS, PARTES
+from data import CATEGORIAS, DICAS_GERAIS, LOJAS, MODELOS, MOTORIZACOES, PARTES
 
 st.set_page_config(
     page_title="AutoPeças PT - SEAT Arona",
@@ -11,34 +11,23 @@ def main():
     st.title("AutoPeças PT")
     st.markdown("Catálogo inteligente de peças, acessórios e referências para **SEAT Arona** e grupo VAG.")
     
-    st.sidebar.header("Filtros de Pesquisa")
-    modelo_sel = st.sidebar.selectbox("Selecione o Modelo", MODELOS)
-    
-    # Novo campo para Chassis / Matrícula
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("Validação do Veículo")
-    vin_input = st.sidebar.text_input("Matrícula ou Chassis (VIN)", placeholder="Ex: 01-AB-23 ou VSSZZZ...")
-    if vin_input:
-        st.sidebar.success(f"Veículo associado: `{vin_input}`")
-    else:
-        st.sidebar.info("Dica: Insira a matrícula para validar peças nas lojas.")
+    st.sidebar.header("Seleção do Veículo")
+    modelo_sel = st.sidebar.selectbox("Modelo", MODELOS)
+    motor_sel = st.sidebar.selectbox("Motorização", MOTORIZACOES)
     
     st.sidebar.markdown("---")
     menu = st.sidebar.radio("Navegação", ["Catálogo de Peças", "Dicas para Poupar", "Lojas Recomendadas"])
     
     if menu == "Catálogo de Peças":
-        pagina_catalogo(modelo_sel, vin_input)
+        pagina_catalogo(modelo_sel, motor_sel)
     elif menu == "Dicas para Poupar":
         pagina_dicas()
     elif menu == "Lojas Recomendadas":
-        pagina_lojas(vin_input)
+        pagina_lojas(motor_sel)
 
-def pagina_catalogo(modelo, vin):
+def pagina_catalogo(modelo, motor):
     st.header("Catálogo de Peças")
-    if vin:
-        st.markdown(f"Peças, normas e preços de referência para: **{modelo}** | *Veículo/Chassis: `{vin}`*")
-    else:
-        st.markdown(f"Peças, normas e preços de referência para: **{modelo}**")
+    st.markdown(f"Peças e referências para: **{modelo}** | *Motorização selecionada: `{motor}`*")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -47,7 +36,11 @@ def pagina_catalogo(modelo, vin):
     with col2:
         pesquisa = st.text_input("Pesquisa livre (ex: filtro, óleo, velas, pastilhas...)")
     
+    # Filtragem rigorosa por motorização e categoria
     resultados = PARTES
+    
+    if motor != "Todas as Motorizações":
+        resultados = [p for p in resultados if p["motorizacao"] == motor or p["motorizacao"] == "Todas as Motorizações"]
     
     if cat_sel != "Todas as Categorias":
         resultados = [p for p in resultados if p["categoria"] == cat_sel]
@@ -65,10 +58,10 @@ def pagina_catalogo(modelo, vin):
     st.markdown("---")
     
     if not resultados:
-        st.warning("Nenhuma peça encontrada com os critérios selecionados. Tente termos mais genéricos.")
+        st.warning("Nenhuma peça encontrada para esta motorização com os critérios selecionados.")
         return
         
-    st.success(f"Encontradas {len(resultados)} peça(s) correspondentes.")
+    st.success(f"Encontradas {len(resultados)} peça(s) compatíveis.")
     
     for peca in resultados:
         with st.container():
@@ -76,31 +69,23 @@ def pagina_catalogo(modelo, vin):
             col_a, col_b = st.columns([2, 1])
             with col_a:
                 st.write(f"**Marca:** {peca['marca']}")
-                st.write(f"**Referência/Código OEM/Ref:** `{peca['codigo']}`")
+                st.write(f"**Referência/Código:** `{peca['codigo']}`")
+                st.write(f"**Compatibilidade:** `{peca['motorizacao']}`")
                 st.write(f"**Descrição:** {peca['descricao']}")
-                st.write(f"**Compatibilidade:** {peca['compatibilidade']}")
             with col_b:
                 st.info(f"Categoria: {peca['categoria']}")
-                # Botão de ajuda para pesquisar rapidamente na AutoDoc com o código da peça
                 query_busca = f"SEAT Arona {peca['codigo']}"
-                st.markdown(f"[🔍 Pesquisar esta referência online](https://www.google.com/search?q={query_busca.replace(' ', '+')})", unsafe_allow_html=True)
+                st.markdown(f"[🔍 Pesquisar referência online](https://www.google.com/search?q={query_busca.replace(' ', '+')})", unsafe_allow_html=True)
             st.markdown("---")
 
 def pagina_dicas():
     st.header("Dicas para Poupar na Manutenção")
-    st.markdown("### ⚠️ Cuidados importantes ao comprar online:")
-    st.markdown("1. **Confirme sempre a compatibilidade** introduzindo a sua matrícula ou número de chassis (VIN) na loja online antes de pagar.")
-    st.markdown("2. **Guarde as faturas**: fundamentais para a garantia das peças e valorização do histórico do veículo.")
-    st.markdown("---")
     for i, dica in enumerate(DICAS_GERAIS, 1):
         st.markdown(f"**{i}.** {dica}")
 
-def pagina_lojas(vin):
+def pagina_lojas(motor):
     st.header("Lojas Recomendadas de Peças")
-    if vin:
-        st.info(f"Dica: Utilize o seu identificador (`{vin}`) na barra de pesquisa de cada uma das lojas abaixo para garantir 100% de precisão.")
-    
-    st.markdown("Consulte os principais fornecedores online com envio para Portugal:")
+    st.info(f"Ao consultar as lojas abaixo para o seu motor **{motor}**, selecione sempre a motorização exata no filtro da respetiva loja.")
     for loja in LOJAS:
         st.markdown(f"- **[{loja['nome']}]({loja['url']})** (Domínio oficial: `{loja['dominio']}`)")
 
