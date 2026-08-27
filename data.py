@@ -1,4 +1,4 @@
-# Base de dados completa e atualizada para SEAT Arona (2017+)
+# Base de dados com links diretos otimizados para SEAT Arona (2017+)
 
 CATEGORIAS = [
     "Filtros e Fluidos",
@@ -42,7 +42,7 @@ PARTES = [
         "preco": 11.50,
         "compatibilidade": "SEAT Arona 1.0 TSI / 1.6 TDI",
         "descricao": "Filtro de óleo de alta eficiência para proteção do motor.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=W71295"
     },
     {
         "id": "oleo-motor",
@@ -54,7 +54,7 @@ PARTES = [
         "preco": 48.90,
         "compatibilidade": "SEAT Arona Gasolina e Diesel",
         "descricao": "Óleo sintético de tecnologia avançada aprovado pelo grupo VAG.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=Castrol+5W30+LL+III"
     },
     {
         "id": "filtro-ar",
@@ -66,7 +66,7 @@ PARTES = [
         "preco": 14.20,
         "compatibilidade": "SEAT Arona 1.0 TSI",
         "descricao": "Retém impurezas e garante o fluxo de ar ideal para a admissão.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=F026400529"
     },
     {
         "id": "filtro-habitaculo",
@@ -78,7 +78,7 @@ PARTES = [
         "preco": 18.50,
         "compatibilidade": "Todos os modelos SEAT Arona",
         "descricao": "Filtro de carvão ativo que remove odores e poluentes do ar exterior.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=CUK26007"
     },
     {
         "id": "velas-ignicao",
@@ -90,7 +90,7 @@ PARTES = [
         "preco": 36.00,
         "compatibilidade": "SEAT Arona 1.0 TSI",
         "descricao": "Velas de irídio de alta durabilidade para ignição otimizada.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=94201"
     },
     {
         "id": "pastilhas-travao-frente",
@@ -102,7 +102,7 @@ PARTES = [
         "preco": 39.90,
         "compatibilidade": "SEAT Arona (Eixo Dianteiro)",
         "descricao": "Pastilhas de travão com excelente poder de travagem e baixo ruído.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=P85150"
     },
     {
         "id": "discos-travao-frente",
@@ -114,7 +114,7 @@ PARTES = [
         "preco": 78.00,
         "compatibilidade": "SEAT Arona (Ventilados)",
         "descricao": "Discos de travão maquinados com alta resistência térmica.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=09C69311"
     },
     {
         "id": "amortecedores-frente",
@@ -126,7 +126,7 @@ PARTES = [
         "preco": 145.00,
         "compatibilidade": "SEAT Arona (Suspensão Standard)",
         "descricao": "Amortecedores a gás de alto desempenho para estabilidade em curva.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=318534"
     },
     {
         "id": "lampada-farol-h7",
@@ -138,7 +138,7 @@ PARTES = [
         "preco": 15.00,
         "compatibilidade": "SEAT Arona (Médios/Máximos)",
         "descricao": "Lâmpada de halogéneo com feixe de luz alargado e duradouro.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=12972PRC1"
     },
     {
         "id": "escovas-limpa-vidros",
@@ -150,7 +150,7 @@ PARTES = [
         "preco": 24.90,
         "compatibilidade": "SEAT Arona (2017+)",
         "descricao": "Escovas planas aerodinâmicas para limpeza silenciosa e sem marcas.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=A863S"
     },
     {
         "id": "parachoques-frente",
@@ -162,7 +162,7 @@ PARTES = [
         "preco": 125.00,
         "compatibilidade": "SEAT Arona (2017+)",
         "descricao": "Pára-choques dianteiro preparado para pintura com primário de alta aderência.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=SEAT+Arona+parachoques"
     },
     {
         "id": "parachoques-tras",
@@ -174,6 +174,6 @@ PARTES = [
         "preco": 110.00,
         "compatibilidade": "SEAT Arona (2017+)",
         "descricao": "Pára-choques traseiro com encaixe perfeito para sensores de estacionamento.",
-        "link_compra": "https://www.autodoc.pt"
+        "link_compra": "https://www.autodoc.pt/search?query=SEAT+Arona+parachoques+tras"
     }
 ]
