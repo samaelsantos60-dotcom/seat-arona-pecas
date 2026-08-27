@@ -18,8 +18,9 @@ DICAS_GERAIS = [
 ]
 
 LOJAS = [
-    {"nome": "AutoDoc Online", "url": "https://www.autodoc.pt"},
-    {"nome": "Oscaro Portugal", "url": "https://www.oscaro.pt"}
+    {"nome": "AutoDoc Online", "dominio": "autodoc.pt", "url": "https://www.autodoc.pt"},
+    {"nome": "Oscaro Portugal", "dominio": "oscaro.pt", "url": "https://www.oscaro.pt"},
+    {"nome": "Norauto", "dominio": "norauto.pt", "url": "https://www.norauto.pt"}
 ]
 
 PARTES = [
